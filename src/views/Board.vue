@@ -11,6 +11,8 @@
             {{ task.description }}
           </p>
         </div>
+
+        <input type="text" placeholder="+ Enter new task" @keyup.enter="createTask($event, column.tasks)" />
       </div>
     </div>
 
@@ -33,6 +35,13 @@ export default {
   methods: {
     goToTask(task) {
       this.$router.push({ name: 'task', params: { id: task.id } });
+    },
+    createTask(event, tasks) {
+      this.$store.commit('CREATE_TASK', {
+        tasks,
+        name: event.target.value,
+      });
+      event.target.value = '';
     },
   },
 };
@@ -71,6 +80,18 @@ export default {
       padding-bottom: 5px;
       text-align: center;
       text-transform: uppercase;
+    }
+
+    input {
+      background-color: $light;
+      border: none;
+      padding: 6px;
+      width: 100%;
+
+      &:hover,
+      &:focus {
+        outline: none;
+      }
     }
   }
 

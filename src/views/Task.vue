@@ -1,10 +1,14 @@
 <template>
   <div class="task-view">
     <div class="task-view__content">
-      {{ task.name }}
-
-      <span class="task-view__close" @click="close">x</span>
+      <input type="text" :value="task.name" @change="updateTaskProperty($event, 'name')" />
+      <textarea
+        :class="{ 'empty-description': !task.description }"
+        :value="task.description || 'Write a description...'"
+        @change="updateTaskProperty($event, 'description')"
+      />
     </div>
+    <span class="task-view__close" @click="close">x</span>
   </div>
 </template>
 
@@ -21,6 +25,13 @@ export default {
   methods: {
     close() {
       this.$router.push({ name: 'board' });
+    },
+    updateTaskProperty(event, key) {
+      this.$store.commit('UPDATE_TASK', {
+        task: this.task,
+        key,
+        value: event.target.value,
+      });
     },
   },
 };
@@ -45,11 +56,43 @@ export default {
     border-radius: 4px;
     padding: 1rem;
     width: 60%;
+
+    input,
+    textarea {
+      display: block;
+      width: 100%;
+      border: none;
+
+      &:hover,
+      &:focus {
+        outline: none;
+      }
+    }
+
+    input {
+      font-size: 16px;
+      font-weight: 600;
+    }
+
+    textarea {
+      padding: 10px 0px;
+    }
   }
 
   &__close {
+    border-radius: 50%;
+    padding: 6px 12px;
+    background: white;
     cursor: pointer;
+    position: relative;
+    bottom: 40px;
+    right: 25px;
     float: right;
+    border: 2px solid black;
+  }
+
+  .empty-description {
+    color: lighten(black, 60%);
   }
 }
 </style>
