@@ -1,14 +1,22 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import Board from '../views/Board.vue';
+import Task from '../views/Task.vue';
 
 Vue.use(VueRouter);
 
 const routes = [
   {
     path: '/',
-    name: 'Board',
+    name: 'board',
     component: Board,
+    children: [
+      {
+        path: 'task/:id',
+        name: 'task',
+        component: Task,
+      },
+    ],
   },
 ];
 

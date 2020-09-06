@@ -3,7 +3,7 @@
     <div class="board__wrapper">
       <div class="board__column" v-for="(column, index) of board.columns" :key="index">
         <strong class="board__column__title"> {{ column.name }} </strong>
-        <div class="board__task" v-for="(task, index) of column.tasks" :key="index">
+        <div class="board__task" v-for="(task, index) of column.tasks" :key="index" @click="goToTask(task)">
           <strong class="board__task__title">
             {{ task.name }}
           </strong>
@@ -13,6 +13,10 @@
         </div>
       </div>
     </div>
+
+    <div class="task" v-if="isTaskOpen">
+      <router-view />
+    </div>
   </div>
 </template>
 
@@ -20,7 +24,17 @@
 import { mapState } from 'vuex';
 
 export default {
-  computed: mapState(['board']),
+  computed: {
+    ...mapState(['board']),
+    isTaskOpen() {
+      return this.$route.name === 'task';
+    },
+  },
+  methods: {
+    goToTask(task) {
+      this.$router.push({ name: 'task', params: { id: task.id } });
+    },
+  },
 };
 </script>
 
@@ -63,6 +77,7 @@ export default {
   &__task {
     background-color: pink;
     border-radius: 5px;
+    cursor: pointer;
     margin-top: 6px;
     padding: 6px;
 
