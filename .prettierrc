@@ -1,0 +1,10 @@
+{
+  "singleQuote": true,
+  "useTabs": false,
+  "arrowParens": "always",
+  "printWidth": 120,
+  "tabWidth": 2,
+  "trailingComma": "all",
+  "cssEnable": ["css"],
+  "eslintIntegration": true
+}
