@@ -1,11 +1,10 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import defaultBoard from '../default-board';
 import { saveStatePlugin, uuid } from '../utils';
 
 Vue.use(Vuex);
 
-const board = JSON.parse(localStorage.getItem('board')) || defaultBoard;
+const board = JSON.parse(localStorage.getItem('board'));
 
 export default new Vuex.Store({
   plugins: [saveStatePlugin],
@@ -51,6 +50,10 @@ export default new Vuex.Store({
       const columnList = state.board.columns;
       const columnToMove = columnList.splice(fromColumnIndex, 1)[0];
       columnList.splice(toColumnIndex, 0, columnToMove);
+    },
+    DELETE_TASK(state, { deleteTask, columnIndex }) {
+      const id = state.board.columns[columnIndex].tasks.map((task) => task.id).indexOf(deleteTask.id);
+      state.board.columns[columnIndex].tasks.splice(id, 1);
     },
   },
   actions: {},
