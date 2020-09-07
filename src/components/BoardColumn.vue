@@ -38,7 +38,12 @@
         :board="board"
       />
 
-      <input type="text" placeholder="+ Enter new task" @keyup.enter="createTask($event, column.tasks)" />
+      <input
+        type="text"
+        class="column__new-column"
+        placeholder="+ Enter new task"
+        @keyup.enter="createTask($event, column.tasks)"
+      />
     </AppDrag>
   </AppDrop>
 </template>
