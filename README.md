@@ -1,34 +1,23 @@
-# trello
+# My Trello! 🥰
+
+➡️ **Preview**: [my-trello-app.netlify.app](https://my-trello-app.netlify.app/)
+
+This small and simple project was made for studies with the aid of the Vue Mastery platform, however the functionalities have been expanded and the idea is to improve it a little more.
+But the application is now available for use!
 
 ## Project setup
 ```
-yarn install
+npm install
 ```
 
 ### Compiles and hot-reloads for development
 ```
-yarn serve
+npm run serve
 ```
 
 ### Compiles and minifies for production
 ```
-yarn build
+npm run build
 ```
 
-### Run your unit tests
-```
-yarn test:unit
-```
-
-### Run your end-to-end tests
-```
-yarn test:e2e
-```
-
-### Lints and fixes files
-```
-yarn lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+![Preview Trello](./screenshots/screenshot.png)
