@@ -46,28 +46,30 @@ export default {
 <style lang="scss" scoped>
 .task-view {
   align-items: center;
-  background-color: #80808047;
+  background-color: #363950b0;
   bottom: 0;
   display: flex;
   height: 100vh;
   justify-content: center;
   left: 0;
-  position: absolute;
+  position: fixed;
   right: 0;
   top: 0;
+  width: 100%;
   z-index: 10;
 
   &__content {
-    background-color: white;
-    border-radius: 4px;
-    padding: 1rem;
+    background-color: $dark;
+    border-radius: 5px;
+    padding: 3px;
     width: 60%;
 
     input,
     textarea {
-      display: block;
-      width: 100%;
       border: none;
+      display: block;
+      padding: 0.6rem 1rem;
+      width: 100%;
 
       &:hover,
       &:focus {
@@ -81,24 +83,25 @@ export default {
     }
 
     textarea {
-      padding: 10px 0px;
+      height: 400px;
     }
   }
 
   &__close {
+    background: lighten($default, 10%);
+    border: 2px solid $dark;
     border-radius: 50%;
-    padding: 6px 12px;
-    background: white;
-    cursor: pointer;
-    position: relative;
-    bottom: 40px;
-    right: 25px;
+    bottom: 215px;
+    font-size: 12px;
     float: right;
-    border: 2px solid black;
+    cursor: pointer;
+    padding: 4px 9px;
+    position: relative;
+    right: 18px;
   }
 
   .empty-description {
-    color: lighten(black, 60%);
+    color: lighten($dark, 60%);
   }
 }
 </style>

@@ -4,7 +4,12 @@ import { saveStatePlugin, uuid } from '../utils';
 
 Vue.use(Vuex);
 
-const board = JSON.parse(localStorage.getItem('board'));
+const defaultBoard = {
+  name: 'trello',
+  columns: [],
+};
+
+const board = JSON.parse(localStorage.getItem('board')) || defaultBoard;
 
 export default new Vuex.Store({
   plugins: [saveStatePlugin],
@@ -41,6 +46,9 @@ export default new Vuex.Store({
     UPDATE_TASK(state, { task, key, value }) {
       task[key] = value;
       // Vue.set(task, key, value)
+    },
+    UPDATE_COLUMN(state, { column, key, value }) {
+      column[key] = value;
     },
     MOVE_TASK(state, { fromTasks, toTasks, fromTaskIndex, toTaskPositionIndex }) {
       const taskToMove = fromTasks.splice(fromTaskIndex, 1)[0];

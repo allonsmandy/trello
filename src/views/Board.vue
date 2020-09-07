@@ -1,5 +1,5 @@
 <template>
-  <div class="board">
+  <div class="board" :class="{ 'open-task': $route.name === 'task' }">
     <div class="board__wrapper">
       <BoardColumn
         v-for="(column, columnIndex) of board.columns"
@@ -55,11 +55,13 @@ export default {
 
 <style scoped lang="scss">
 .board {
-  background-color: $default;
+  background-image: url('../assets/img/bg.jpg');
+  background-position: center;
   bottom: 0px;
   height: 100vh;
   left: 0px;
   overflow: scroll;
+  overflow-y: hidden;
   position: fixed;
   right: 0px;
   top: 0px;
@@ -70,13 +72,19 @@ export default {
 
   &__newColumn input {
     background-color: $default;
-    border: none;
-    margin-top: 10px;
+    margin: 10px 10px 0 0;
+    padding: 4px;
+    border: 3px solid $dark;
+    border-radius: 5px;
 
     &:hover,
     &:focus {
       outline: none;
     }
   }
+}
+
+.open-task {
+  overflow: hidden;
 }
 </style>

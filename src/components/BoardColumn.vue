@@ -2,7 +2,12 @@
   <AppDrop @drop="moveTaskOrColumn">
     <AppDrag class="column" :transferData="{ type: 'column', fromColumnIndex: columnIndex }">
       <div class="column__wrapper">
-        <strong class="column__title"> {{ column.name }} </strong>
+        <textarea
+          :value="column.name"
+          class="column__title"
+          @change="updateColumnName($event, 'name')"
+          @keyup.enter="updateColumnName($event, 'name')"
+        />
         <button class="column__delete" @click.prevent="deleteColumn(columnIndex)">
           <svg
             width="1em"
@@ -60,6 +65,14 @@ export default {
       event.dataTransfer.setData('type', 'column');
     },
 
+    updateColumnName(event, key) {
+      this.$store.commit('UPDATE_COLUMN', {
+        column: this.column,
+        key,
+        value: event.target.value,
+      });
+    },
+
     createTask(event, tasks) {
       this.$store.commit('CREATE_TASK', {
         tasks,
@@ -82,43 +95,48 @@ export default {
   background-color: $light;
   border: 3px solid $dark;
   border-radius: 5px;
+  max-height: 90vh;
   margin: 10px;
   min-width: 350px;
+  overflow: auto;
   padding: 15px;
   width: 350px;
 
   &__wrapper {
+    align-items: flex-start;
     display: flex;
     justify-content: space-between;
   }
 
   &__title {
     border-bottom: 1px solid lighten($dark, 15%);
-    color: $primary;
-    display: block;
-    font-family: sans-serif;
+    color: $purple;
+    font-size: 16px;
     letter-spacing: 2px;
-    padding-bottom: 5px;
     text-align: center;
     text-transform: uppercase;
-    width: 100%;
   }
 
   &__delete {
     background: none;
     border: none;
-    color: red;
+    color: darken($primary, 40%);
     cursor: pointer;
+    margin-top: 3px;
 
     &:hover {
-      color: darken(red, 70%);
+      color: darken($primary, 80%);
+    }
+
+    &:focus {
+      outline: none;
     }
   }
 
+  textarea,
   input {
     background-color: $light;
     border: none;
-    padding: 6px;
     width: 100%;
 
     &:hover,
