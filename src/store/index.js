@@ -55,6 +55,9 @@ export default new Vuex.Store({
       const id = state.board.columns[columnIndex].tasks.map((task) => task.id).indexOf(deleteTask.id);
       state.board.columns[columnIndex].tasks.splice(id, 1);
     },
+    DELETE_COLUMN(state, { columnIndex }) {
+      state.board.columns.splice(columnIndex, 1);
+    },
   },
   actions: {},
   modules: {},
