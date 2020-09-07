@@ -1,7 +1,12 @@
 <template>
   <div class="task-view">
     <div class="task-view__content">
-      <input type="text" :value="task.name" @change="updateTaskProperty($event, 'name')" />
+      <input
+        type="text"
+        :value="task.name"
+        @change="updateTaskProperty($event, 'name')"
+        @keyup.enter="updateTaskProperty($event, 'name')"
+      />
       <textarea
         :class="{ 'empty-description': !task.description }"
         :value="task.description || 'Write a description...'"
