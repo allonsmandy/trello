@@ -33,6 +33,10 @@
 
         <input type="text" placeholder="+ Enter new task" @keyup.enter="createTask($event, column.tasks)" />
       </div>
+
+      <div class="board__newColumn">
+        <input type="text" v-model="newColumnName" placeholder="+ Enter new column" @keyup.enter="createColumn" />
+      </div>
     </div>
 
     <div class="task" v-if="isTaskOpen">
@@ -45,6 +49,11 @@
 import { mapState } from 'vuex';
 
 export default {
+  data() {
+    return {
+      newColumnName: '',
+    };
+  },
   computed: {
     ...mapState(['board']),
     isTaskOpen() {
@@ -62,6 +71,16 @@ export default {
         name: event.target.value,
       });
       event.target.value = '';
+    },
+
+    createColumn() {
+      if (this.newColumnName) {
+        this.$store.commit('CREATE_COLUMN', {
+          name: this.newColumnName,
+        });
+
+        this.newColumnName = '';
+      }
     },
 
     pickupTask(event, taskIndex, fromColumnIndex) {
@@ -160,6 +179,17 @@ export default {
       &:focus {
         outline: none;
       }
+    }
+  }
+
+  &__newColumn input {
+    background-color: $default;
+    border: none;
+    margin-top: 10px;
+
+    &:hover,
+    &:focus {
+      outline: none;
     }
   }
 
